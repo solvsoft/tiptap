@@ -1,4 +1,4 @@
-export type Attributes = Record<string, any>;
+type Attributes = Record<string, any>;
 
 export type DOMOutputSpecElement = 0 | Attributes | DOMOutputSpecArray;
 /**
@@ -43,5 +43,8 @@ export const h: JSXRenderer = (tag, attributes, ...children) => {
 // https://www.typescriptlang.org/tsconfig/#jsxImportSource
 
 export {
-  h as createElement, h as jsx, h as jsxDEV, h as jsxs,
+  h as createElement,
+  h as jsx,
+  h as jsxDEV,
+  h as jsxs,
 }

@@ -79,10 +79,7 @@ export default () => {
           >
             Green
           </button>
-          <button
-            onClick={() => editor.chain().focus().unsetColor().run()}
-            data-testid="unsetColor"
-          >
+          <button onClick={() => editor.chain().focus().unsetColor().run()} data-testid="unsetColor">
             Unset color
           </button>
         </div>

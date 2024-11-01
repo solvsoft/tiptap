@@ -59,7 +59,6 @@ export const EditorContent = defineComponent({
 
           editor.createNodeViews()
         })
-
       }
     })
 
@@ -78,11 +77,10 @@ export const EditorContent = defineComponent({
   },
 
   render() {
-    return h(
-      'div',
-      {
-        ref: (el: any) => { this.rootEl = el },
+    return h('div', {
+      ref: (el: any) => {
+        this.rootEl = el
       },
-    )
+    })
   },
 })

@@ -19,62 +19,34 @@ const MenuBar = () => {
       <div className="button-group">
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleBold()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().toggleBold().run()}
           className={editor.isActive('bold') ? 'is-active' : ''}
         >
           Bold
         </button>
         <button
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleItalic()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().toggleItalic().run()}
           className={editor.isActive('italic') ? 'is-active' : ''}
         >
           Italic
         </button>
         <button
           onClick={() => editor.chain().focus().toggleStrike().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleStrike()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().toggleStrike().run()}
           className={editor.isActive('strike') ? 'is-active' : ''}
         >
           Strike
         </button>
         <button
           onClick={() => editor.chain().focus().toggleCode().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleCode()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().toggleCode().run()}
           className={editor.isActive('code') ? 'is-active' : ''}
         >
           Code
         </button>
-        <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-          Clear marks
-        </button>
-        <button onClick={() => editor.chain().focus().clearNodes().run()}>
-          Clear nodes
-        </button>
+        <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>Clear marks</button>
+        <button onClick={() => editor.chain().focus().clearNodes().run()}>Clear nodes</button>
         <button
           onClick={() => editor.chain().focus().setParagraph().run()}
           className={editor.isActive('paragraph') ? 'is-active' : ''}
@@ -141,33 +113,17 @@ const MenuBar = () => {
         >
           Blockquote
         </button>
-        <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-          Horizontal rule
-        </button>
-        <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-          Hard break
-        </button>
+        <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>Horizontal rule</button>
+        <button onClick={() => editor.chain().focus().setHardBreak().run()}>Hard break</button>
         <button
           onClick={() => editor.chain().focus().undo().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .undo()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().undo().run()}
         >
           Undo
         </button>
         <button
           onClick={() => editor.chain().focus().redo().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .redo()
-              .run()
-          }
+          disabled={!editor.can().chain().focus().redo().run()}
         >
           Redo
         </button>
@@ -229,7 +185,5 @@ const content = `
 `
 
 export default () => {
-  return (
-    <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
-  )
+  return <EditorProvider slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
 }

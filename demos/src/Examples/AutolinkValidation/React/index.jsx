@@ -34,15 +34,13 @@ export default () => {
 
     // empty
     if (url === '') {
-      editor.chain().focus().extendMarkRange('link').unsetLink()
-        .run()
+      editor.chain().focus().extendMarkRange('link').unsetLink().run()
 
       return
     }
 
     // update link
-    editor.chain().focus().extendMarkRange('link').setLink({ href: url })
-      .run()
+    editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
   }, [editor])
 
   if (!editor) {
@@ -53,11 +51,7 @@ export default () => {
     <>
       <div className="control-group">
         <div className="button-group">
-          <button
-            onClick={setLink}
-            className={editor.isActive('link') ? 'is-active' : ''}
-            data-testid="setLink"
-          >
+          <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''} data-testid="setLink">
             Set link
           </button>
           <button

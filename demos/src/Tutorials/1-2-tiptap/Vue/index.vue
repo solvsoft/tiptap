@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import './styles.scss'
 
 import Note from './Note.vue'

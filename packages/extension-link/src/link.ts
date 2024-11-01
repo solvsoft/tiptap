@@ -1,6 +1,4 @@
-import {
-  Mark, markPasteRule, mergeAttributes, PasteRuleMatch,
-} from '@tiptap/core'
+import { Mark, markPasteRule, mergeAttributes, PasteRuleMatch } from '@tiptap/core'
 import { Plugin } from '@tiptap/pm/state'
 import { find, registerCustomProtocol, reset } from 'linkifyjs'
 
@@ -15,22 +13,23 @@ export interface LinkProtocolOptions {
    * @example 'ftp'
    * @example 'git'
    */
-  scheme: string;
+  scheme: string
 
   /**
    * If enabled, it allows optional slashes after the protocol.
    * @default false
    * @example true
    */
-  optionalSlashes?: boolean;
+  optionalSlashes?: boolean
 }
 
-export const pasteRegex = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{2,}\b(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)/gi
+export const pasteRegex =
+  /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z]{2,}\b(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)(?:[-a-zA-Z0-9@:%._+~#=?!&/]*)/gi
 
 /**
  * @deprecated The default behavior is now to open links when the editor is not editable.
  */
-type DeprecatedOpenWhenNotEditable = 'whenNotEditable';
+type DeprecatedOpenWhenNotEditable = 'whenNotEditable'
 
 export interface LinkOptions {
   /**
@@ -88,13 +87,23 @@ declare module '@tiptap/core' {
        * @param attributes The link attributes
        * @example editor.commands.setLink({ href: 'https://tiptap.dev' })
        */
-      setLink: (attributes: { href: string; target?: string | null; rel?: string | null; class?: string | null }) => ReturnType
+      setLink: (attributes: {
+        href: string
+        target?: string | null
+        rel?: string | null
+        class?: string | null
+      }) => ReturnType
       /**
        * Toggle a link mark
        * @param attributes The link attributes
        * @example editor.commands.toggleLink({ href: 'https://tiptap.dev' })
        */
-      toggleLink: (attributes: { href: string; target?: string | null; rel?: string | null; class?: string | null }) => ReturnType
+      toggleLink: (attributes: {
+        href: string
+        target?: string | null
+        rel?: string | null
+        class?: string | null
+      }) => ReturnType
       /**
        * Unset a link mark
        * @example editor.commands.unsetLink()
@@ -114,7 +123,7 @@ function isAllowedUri(uri: string | undefined, protocols?: LinkOptions['protocol
 
   if (protocols) {
     protocols.forEach(protocol => {
-      const nextProtocol = (typeof protocol === 'string' ? protocol : protocol.scheme)
+      const nextProtocol = typeof protocol === 'string' ? protocol : protocol.scheme
 
       if (nextProtocol) {
         allowedProtocols.push(nextProtocol)
@@ -123,7 +132,13 @@ function isAllowedUri(uri: string | undefined, protocols?: LinkOptions['protocol
   }
 
   // eslint-disable-next-line no-useless-escape
-  return !uri || uri.replace(ATTR_WHITESPACE, '').match(new RegExp(`^(?:(?:${allowedProtocols.join('|')}):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))`, 'i'))
+  return (
+    !uri ||
+    uri
+      .replace(ATTR_WHITESPACE, '')
+      // eslint-disable-next-line no-useless-escape
+      .match(new RegExp(`^(?:(?:${allowedProtocols.join('|')}):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))`, 'i'))
+  )
 }
 
 /**
@@ -194,18 +209,20 @@ export const Link = Mark.create<LinkOptions>({
   },
 
   parseHTML() {
-    return [{
-      tag: 'a[href]',
-      getAttrs: dom => {
-        const href = (dom as HTMLElement).getAttribute('href')
+    return [
+      {
+        tag: 'a[href]',
+        getAttrs: dom => {
+          const href = (dom as HTMLElement).getAttribute('href')
 
-        // prevent XSS attacks
-        if (!href || !isAllowedUri(href, this.options.protocols)) {
-          return false
-        }
-        return null
+          // prevent XSS attacks
+          if (!href || !isAllowedUri(href, this.options.protocols)) {
+            return false
+          }
+          return null
+        },
       },
-    }]
+    ]
   },
 
   renderHTML({ HTMLAttributes }) {
@@ -221,12 +238,14 @@ export const Link = Mark.create<LinkOptions>({
   addCommands() {
     return {
       setLink:
-        attributes => ({ chain }) => {
+        attributes =>
+        ({ chain }) => {
           return chain().setMark(this.name, attributes).setMeta('preventAutolink', true).run()
         },
 
       toggleLink:
-        attributes => ({ chain }) => {
+        attributes =>
+        ({ chain }) => {
           return chain()
             .toggleMark(this.name, attributes, { extendEmptyMarkRange: true })
             .setMeta('preventAutolink', true)
@@ -234,11 +253,9 @@ export const Link = Mark.create<LinkOptions>({
         },
 
       unsetLink:
-        () => ({ chain }) => {
-          return chain()
-            .unsetMark(this.name, { extendEmptyMarkRange: true })
-            .setMeta('preventAutolink', true)
-            .run()
+        () =>
+        ({ chain }) => {
+          return chain().unsetMark(this.name, { extendEmptyMarkRange: true }).setMeta('preventAutolink', true).run()
         },
     }
   },
@@ -254,13 +271,15 @@ export const Link = Mark.create<LinkOptions>({
             const links = find(text).filter(item => item.isLink && validate(item.value))
 
             if (links.length) {
-              links.forEach(link => (foundLinks.push({
-                text: link.value,
-                data: {
-                  href: link.href,
-                },
-                index: link.start,
-              })))
+              links.forEach(link =>
+                foundLinks.push({
+                  text: link.value,
+                  data: {
+                    href: link.href,
+                  },
+                  index: link.start,
+                }),
+              )
             }
           }
 

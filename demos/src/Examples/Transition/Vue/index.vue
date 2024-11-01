@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import StarterKit from '@tiptap/starter-kit'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 import { ref } from 'vue'
@@ -22,10 +21,7 @@ const editor = useEditor({
       class: 'textarea',
     },
   },
-  extensions: [
-    StarterKit,
-    VueComponent,
-  ],
+  extensions: [StarterKit, VueComponent],
 })
 
 const showEditor = ref(false)
@@ -34,12 +30,10 @@ const showEditor = ref(false)
 
 <template>
   <div>
-    <button
-      type="button"
-      @click="showEditor = !showEditor"
-      style="margin-bottom: 1rem;"
-      id="toggle-editor"
-    >
+    <button type="button"
+@click="showEditor = !showEditor"
+style="margin-bottom: 1rem"
+id="toggle-editor">
       {{ showEditor ? 'Hide editor' : 'Show editor' }}
     </button>
 

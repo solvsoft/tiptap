@@ -31,9 +31,7 @@ context('/src/Marks/Link/React/', () => {
   it('should parse a tags with rel attribute correctly', () => {
     cy.get('.tiptap').then(([{ editor }]) => {
       editor.commands.setContent('<p><a href="#" rel="follow">Example Text3</a></p>')
-      expect(editor.getHTML()).to.eq(
-        '<p><a target="_blank" rel="follow" href="#">Example Text3</a></p>',
-      )
+      expect(editor.getHTML()).to.eq('<p><a target="_blank" rel="follow" href="#">Example Text3</a></p>')
     })
   })
 
@@ -62,22 +60,34 @@ context('/src/Marks/Link/React/', () => {
   })
 
   it('detects autolinking', () => {
-    cy.get('.tiptap').type('https://example.com ').find('a').should('contain', 'https://example.com')
+    cy.get('.tiptap')
+      .type('https://example.com ')
+      .find('a')
+      .should('contain', 'https://example.com')
       .should('have.attr', 'href', 'https://example.com')
   })
 
   it('detects autolinking with numbers', () => {
-    cy.get('.tiptap').type('https://tiptap4u.com ').find('a').should('contain', 'https://tiptap4u.com')
+    cy.get('.tiptap')
+      .type('https://tiptap4u.com ')
+      .find('a')
+      .should('contain', 'https://tiptap4u.com')
       .should('have.attr', 'href', 'https://tiptap4u.com')
   })
 
   it('uses the default protocol', () => {
-    cy.get('.tiptap').type('example.com ').find('a').should('contain', 'example.com')
+    cy.get('.tiptap')
+      .type('example.com ')
+      .find('a')
+      .should('contain', 'example.com')
       .should('have.attr', 'href', 'https://example.com')
   })
 
   it('uses a non-default protocol if present', () => {
-    cy.get('.tiptap').type('http://example.com ').find('a').should('contain', 'http://example.com')
+    cy.get('.tiptap')
+      .type('http://example.com ')
+      .find('a')
+      .should('contain', 'http://example.com')
       .should('have.attr', 'href', 'http://example.com')
   })
 
@@ -112,21 +122,14 @@ context('/src/Marks/Link/React/', () => {
 
   it('correctly detects multiple pasted URLs', () => {
     cy.get('.tiptap').paste({
-      pastePayload:
-        'https://example1.com, https://example2.com/foobar, (http://example3.com/foobar)',
+      pastePayload: 'https://example1.com, https://example2.com/foobar, (http://example3.com/foobar)',
       pasteType: 'text/plain',
     })
 
-    cy.get('.tiptap')
-      .find('a[href="https://example1.com"]')
-      .should('contain', 'https://example1.com')
+    cy.get('.tiptap').find('a[href="https://example1.com"]').should('contain', 'https://example1.com')
 
-    cy.get('.tiptap')
-      .find('a[href="https://example2.com/foobar"]')
-      .should('contain', 'https://example2.com/foobar')
+    cy.get('.tiptap').find('a[href="https://example2.com/foobar"]').should('contain', 'https://example2.com/foobar')
 
-    cy.get('.tiptap')
-      .find('a[href="http://example3.com/foobar"]')
-      .should('contain', 'http://example3.com/foobar')
+    cy.get('.tiptap').find('a[href="http://example3.com/foobar"]').should('contain', 'http://example3.com/foobar')
   })
 })

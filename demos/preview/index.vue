@@ -16,17 +16,16 @@ const searchValue = ref('')
       placeholder="Search for a demo..."
       autofocus
       v-model="searchValue"
-    >
+    />
     <ul v-if="showDemoList || listing">
       <li
         class="p-5 border-b-2 border-black"
-        v-for="route in $router.options.routes.filter(route => searchValue === ''? true : route.props.name.toLowerCase().includes(searchValue.toLowerCase()))"
+        v-for="route in $router.options.routes.filter(route =>
+          searchValue === '' ? true : route.props.name.toLowerCase().includes(searchValue.toLowerCase()),
+        )"
         :key="route.path"
       >
-        <router-link
-          class="block mb-2 font-medium"
-          :to="route.path"
-        >
+        <router-link class="block mb-2 font-medium" :to="route.path">
           {{ route.props.name }}
         </router-link>
 
@@ -77,9 +76,7 @@ export default {
 
   computed: {
     query() {
-      return Object.fromEntries(Object
-        .entries(this.$route.query)
-        .map(([key, value]) => [key, this.fromString(value)]))
+      return Object.fromEntries(Object.entries(this.$route.query).map(([key, value]) => [key, this.fromString(value)]))
     },
 
     listing() {

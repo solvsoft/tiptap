@@ -1,5 +1,27 @@
 # Change Log
 
+## 3.0.0-next.2
+
+### Major Changes
+
+- 37913d5: Fix `getPos` type in `NodeViewRendererProps` to potentially be `undefined`
+
+  Breaking change: Types may flag uses of getPos where an `undefined` possibility isn't handled.
+  Why this change was made: To ensure the type reflects the real functionality of this function.
+  How to update: Ensure that the return value of `getPos` exists before making use of the value.
+
+- 12bb31a: `insertContent` and `insertContentAt` commands should not split text nodes like paragraphs into multiple nodes when the inserted content is at the beginning of the text to avoid empty nodes being created
+
+### Minor Changes
+
+- 893e44e: Previously, only a json representation of the node could be inserted into the editor. This change allows for the insertion of Prosemirror `Node`s and `Fragment`s directly into the editor through the `insertContentAt`, `setContent` and `insertContent` commands.
+
+### Patch Changes
+
+- 48cba54: preserve existing node attributes when running setNode
+- f323e5b: Addresses a bug with `insertContentAt`'s `simulatedPasteRules` option where it could only accept text and not Prosemirror `Node` and `Content`
+- d2f366d: Updates the types of `addOptions` and `addStorage` to have the parent be possibly undefined which is the most accurate typing
+
 ## 3.0.0-next.1
 
 ### Major Changes

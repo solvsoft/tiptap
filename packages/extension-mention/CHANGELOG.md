@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.0-next.2
+
+### Patch Changes
+
+- 6b2df67: add zero-width space to resolve cursor selection issue
+
 ## 3.0.0-next.1
 
 ### Major Changes

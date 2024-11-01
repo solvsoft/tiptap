@@ -1,5 +1,11 @@
 # Change Log
 
+## 3.0.0-next.2
+
+### Patch Changes
+
+- 1523901: enforce cellMinWidth even on column not resized by the user, fixes #5435
+
 ## 3.0.0-next.1
 
 ### Major Changes

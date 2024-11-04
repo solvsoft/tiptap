@@ -1,5 +1,11 @@
 # Change Log
 
+## 2.10.0
+
+### Patch Changes
+
+- 830e683: Add `element: HTMLElement` to `shouldShow` options within the BubbleMenu options.
+
 ## 2.9.1
 
 ## 2.9.0
